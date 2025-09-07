@@ -1,0 +1,39 @@
+services:
+  application:
+    build: ..
+    container_name: itroom_test_task
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./application.env
+    restart: on-failure
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - application-network
+
+
+  database:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    env_file:
+      - ./database.env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - application-network
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U admin -d mydatabase" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  postgres_data:
+
+networks:
+  application-network:
+    driver: bridge
