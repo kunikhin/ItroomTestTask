@@ -32,7 +32,7 @@
    ```
 2.  Создайте jar в папке target
    ```bash
-  mvn clean package
+   mvn clean package
    ```
 3. Запустите приложение с помощью Docker Compose:
    ```bash
