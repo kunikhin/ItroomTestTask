@@ -30,9 +30,13 @@
    ```bash
    git clone https://github.com/kunikhin/ItroomTestTask.git
    ```
-2. Запустите приложение с помощью Docker Compose:
+2.  Создайте jar в папке target
    ```bash
-   docker-compose up --build
+  mvn clean package
+   ```
+3. Запустите приложение с помощью Docker Compose:
+   ```bash
+   docker-compose -f docker/docker-compose.yml up --build
    ```
 Приложение будет доступно по адресу: `http://localhost:8080`
 
